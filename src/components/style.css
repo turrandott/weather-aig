@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap');
+
+main {
+    background: url("../assets/bg-medium.jpeg") no-repeat fixed center bottom;
+    background-size: cover;
+    min-height: 100vh;
+    box-sizing: border-box;
+    box-shadow: inset 0 0 0 100vw rgb(0 0 0 / 60%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Raleway', sans-serif;
+}
+
+.locations {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    padding: .5em;
+}
+
+/* location card */
+
+.fullHeight {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.locationCard {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+    max-width: 20em;
+    max-height: 10em;
+    margin: 1em .5em;
+    background-color: rgba(255, 255, 255, 0.2);
+    color:rgba(255, 255, 255);
+    padding: 1em;
+    flex-grow: 1;
+    align-items: stretch;
+}
+
+.locationCard:hover {
+    transform: scale(1.02);
+}
+
+@media (max-width: 850px) {
+    .locations {
+        flex-direction: column;
+    }
+
+    .locationCard {
+        min-width: 90%;
+        margin: .5em auto;
+    }
+}
+
+.locationCard:hover {
+    cursor: pointer;
+}
+
+.locationCardTitle {
+    font-size: 2em;
+    margin: 0;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.shortInfoCard {
+    display: flex;
+    align-items: center;
+}
+
+.shortTemp {
+    font-size: 1.6em;
+    flex-grow: 1
+}
+
+/* location details */
+.locationDetails {
+    position: fixed;
+    width: 100vw;
+    color:rgba(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    padding: 1em 0;
+}
+
+.locationName {
+    font-size: 5em;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0;
+}
+
+.normalText {
+    font-size: 2em;
+}
+
+.lightText {
+    padding-left: .5em;
+    padding-right: .5em;
+    color: rgb(255 255 255 / 50%);
+    font-size: 2em;
+}
+
+.iconCard {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+    margin: 1em .6em 1.4em .1em;
+    background-color: rgba(255, 255, 255, 0.2);
+    color:rgba(255, 255, 255);
+    width: 100px;
+    height: 100px;
+}
+
+@media (max-width: 850px) {
+    .locationName {
+        font-size: 3em;
+    }
+
+    .normalText {
+        font-size: 1.5em;
+    }
+
+    .lightText {
+        font-size: 1.5em;
+    }
+
+    .iconCard {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+.flexRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: .5em 0;
+    flex-wrap: wrap;
+}
+
+/* close button */
+.closeContainer {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    float: right;
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: 1em;
+}
+  
+.leftright {
+    height: 4px;
+    width: 50px;
+    position: absolute;
+    margin-top: 24px;
+    background-color: rgb(255 255 255 / 50%);
+    border-radius: 2px;
+    transform: rotate(45deg);
+    transition: all .3s ease-in;
+}
+  
+.rightleft {
+    height: 4px;
+    width: 50px;
+    position: absolute;
+    margin-top: 24px;
+    background-color: rgb(255 255 255 / 50%);
+    border-radius: 2px;
+    transform: rotate(-45deg);
+    transition: all .3s ease-in;
+}
+  
+.close {
+    margin: 60px 0 0 5px;
+    position: absolute;
+}
+  
+.closeContainer:hover .leftright {
+    transform: rotate(-45deg);
+    background-color: rgb(255 255 255 / 50%);
+}
+
+.closeContainer:hover .rightleft {
+    transform: rotate(45deg);
+    background-color: rgb(255 255 255 / 50%);
+}
+
+.closeContainer:hover label {
+    opacity: 1;
+}

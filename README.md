@@ -1,5 +1,7 @@
 # Getting Started with Create React App
 
+Photo by [https://www.pexels.com/@technobulka?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels](Stanislav Kondratiev) from [https://www.pexels.com/photo/white-clouds-and-blue-sky-2909261/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels](Pexels)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
