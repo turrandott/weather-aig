@@ -1,18 +1,23 @@
 import axios from 'axios'
 
-const apiKey = 'e46b0ec78347abd7505637e03b8ab9bd'
+import apiKey from './apiKey'
 
 const api = axios.create({
     baseURL: `http://api.openweathermap.org/data/2.5/`
 })
 
-const getWeather = (location) => {
+const getWeather = (location, retries = 3) => {
     return api.get(`weather?APPID=${apiKey}&q=${location}&units=metric`)
         .then(data => {
-            return data.data
+            console.log("ai call", data)
+            return data
         })
         .catch(error => {
-            return {}
+            if (retries > 0) {
+                return getWeather(location, retries - 1)
+            } else {
+                return error.response
+            }
         })
 }
 

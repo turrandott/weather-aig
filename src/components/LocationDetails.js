@@ -1,16 +1,65 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 
 import Temperature from './Temperature'
 import CloseButton from './CloseButton'
 import { getWindDirection } from '../utils/wind'
+import WeatherContext from './context/WeatherContext'
+import { getWeather } from '../utils/api'
 
-function LocationDetails({ locData, closeLocation }) {
+function LocationDetails({ location, closeLocation }) {
+
+    const { locationsWeather, setLocationsWeather } = useContext(WeatherContext)
+
+    useEffect(() => {
+        const setData = async () => {
+            const response = await getWeather(location)
+            if (response.status === 200) {
+                setLocationsWeather(prevState => { 
+                    return {
+                        ...prevState,
+                        [location]: {
+                            ...response.data,
+                            time: new Date()
+                        }
+                    }
+                })
+            }
+        }
+
+        if (locationsWeather[location] 
+            && locationsWeather[location].time
+            && new Date() - locationsWeather[location].time <= 60000) {
+            //есть свежая запись
+            
+            const timeout = setTimeout(() => {
+                setData()
+            }, new Date() - locationsWeather[location].time)
+
+            clearTimeout(timeout)
+
+            const interval = setInterval(() => {
+                setData()
+            }, 60000)
+
+            return () => clearInterval(interval)
+        } else {
+            setData()
+            const interval = setInterval(() => {
+                setData()
+            }, 60000)
+    
+            return () => clearInterval(interval)
+
+        }
+    }, [location])
+
+    const locData = locationsWeather[location]
 
     return (
         <div className="fullHeight" onClick={closeLocation}>
             <CloseButton closeLocation={closeLocation}/>
             <div className="locationDetails">
-                {locData.name
+                {locData && new Date() - locData.time < 120000
                     ? <>
                         <h1 className="locationName">{locData.name}</h1>
                         <div className="flexRow">

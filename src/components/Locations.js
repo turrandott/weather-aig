@@ -3,14 +3,14 @@ import React from 'react'
 import LocationCard from './LocationCard'
 
 
-function Locations({ locationsWeather, openLocation, location }) {
+function Locations({ cities, openLocation, invisible }) {
 
     return (
-        <div className="locations" style={location ? {display: "none"} : {}}>
-            {locationsWeather.map((locationData, index) => 
+        <div className="locations" style={invisible ? {display: "none"} : {}}>
+            {cities.map(city => 
                 <LocationCard
-                    key={locationData.city ? locationData.city : index}
-                    locationData={locationData}
+                    key={city.code}
+                    city={city}
                     openLocation={openLocation}
                 />
             )}

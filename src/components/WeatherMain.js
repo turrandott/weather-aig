@@ -1,32 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Locations from './Locations'
 import './style.css'
-import { getWeather } from '../utils/api'
 import LocationDetails from './LocationDetails'
 import cities from '../utils/cities' 
+import WeatherState from './context/WeatherState'
 
 function WeatherMain() {
-
-    const [locationsWeather, setLocationsWeather] = useState([])
-
-    useEffect(() => {
-        const setData = async () => {
-            const weatherArray = cities.map(async (city) => {
-                const response = await getWeather(city.code)
-                return {...response, city: city.name}
-            })
-            setLocationsWeather(weatherArray)
-        }
-
-        const interval = setInterval(() => {
-            setData()
-        }, 120000)
-
-        setData()
-
-        return () => clearInterval(interval)
-
-    }, [])
 
     const [location, setLocation] = useState(null)
 
@@ -39,19 +18,21 @@ function WeatherMain() {
     }
 
     return (
-        <main>
-            <Locations 
-                openLocation={openLocation} 
-                locationsWeather={locationsWeather}
-                location={location}        
-            />
-            {location && 
-                <LocationDetails 
-                    locData={location} 
-                    closeLocation={closeLocation}
+        <WeatherState>
+            <main>
+                <Locations
+                    cities={cities} 
+                    openLocation={openLocation} 
+                    invisible={!!location}
                 />
-            }
-        </main>
+                {location && 
+                    <LocationDetails
+                        location={location}
+                        closeLocation={closeLocation}
+                    />
+                }
+            </main>
+        </WeatherState>
     )
 }
   
